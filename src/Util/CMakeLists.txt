@@ -1,0 +1,37 @@
+set(MODE "LIB")
+#项目名，默认目录名
+GET_DIR_NAME(DIRNAME)
+set(TARGET_NAME ${DIRNAME})
+
+#文件夹路径名
+GET_DIR_NAME(DIRNAME)
+set(FOLDER_NAME ${DIRNAME})
+
+#多个源文件用 [空格] 分隔
+#如：set(STR_TARGET_SOURCES "main.cpp src_2.cpp")
+file(GLOB SRC
+    "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/*.c"
+)
+set(STR_TARGET_SOURCES "")
+foreach(SOURCE ${SRC})
+	set(STR_TARGET_SOURCES "${STR_TARGET_SOURCES} ${SOURCE}")
+endforeach(SOURCE ${SRC})
+set(STR_TARGET_SOURCES "${STR_TARGET_SOURCES} ${CMAKE_SOURCE_DIR}/include/Util/camera.h")
+set(STR_TARGET_SOURCES "${STR_TARGET_SOURCES} ${CMAKE_SOURCE_DIR}/include/Util/helper.h")
+set(STR_TARGET_SOURCES "${STR_TARGET_SOURCES} ${CMAKE_SOURCE_DIR}/include/Util/mesh.h")
+set(STR_TARGET_SOURCES "${STR_TARGET_SOURCES} ${CMAKE_SOURCE_DIR}/include/Util/model.h")
+set(STR_TARGET_SOURCES "${STR_TARGET_SOURCES} ${CMAKE_SOURCE_DIR}/include/Util/shader.h")
+set(STR_TARGET_SOURCES "${STR_TARGET_SOURCES} ${CMAKE_SOURCE_DIR}/include/Util/stb_image.h")
+#多个库文件用 [空格] 分隔，如果为空，就输入[一个空格]
+#如：set(STR_TARGET_LIBS "lib1.lib lib2.lib")
+# set(STR_TARGET_LIBS " ")
+
+# SETUP_PROJECT(${MODE} ${TARGET_NAME} ${STR_TARGET_SOURCES} ${STR_TARGET_LIBS})
+
+string(REPLACE " " ";" LIST_TARGET_SOURCES ${STR_TARGET_SOURCES})
+add_library(${TARGET_NAME} STATIC ${LIST_TARGET_SOURCES})
+set(INSTALL_DIR "lib/${FOLDER_NAME}")
+set_target_properties(${TARGET_NAME} PROPERTIES FOLDER ${FOLDER_NAME})
+target_link_libraries(${TARGET_NAME} assimp.lib glfw3.lib)
+install (TARGETS ${TARGET_NAME} DESTINATION ${INSTALL_DIR})
