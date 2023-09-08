@@ -78,8 +78,8 @@ int main() {
 
   // build and compile shaders
   // -------------------------
-  Shader terrainshader("D:/Files/master/Study-Course/learnopengl/LearnOpenGL/data/shaders/Terrain/terrain.vert",
-    "D:/Files/master/Study-Course/learnopengl/LearnOpenGL/data/shaders/Terrain/terrain.frag");
+  Shader terrainshader("D:/Files/master/Study-Course/learnopengl/LearnOpenGL/data/shaders/Terrain/1_height_map.vert",
+    "D:/Files/master/Study-Course/learnopengl/LearnOpenGL/data/shaders/Terrain/1_height_map.frag");
 
   stbi_set_flip_vertically_on_load(true);
   int width, height, nrComponents;
