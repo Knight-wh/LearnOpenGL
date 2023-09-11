@@ -13,6 +13,40 @@ public:
   unsigned int ID;
 
   // constructor reads and builds the shader
+  
+  // computer shader
+  Shader(const char* computePath) {
+    std::string compCode;
+    std::ifstream cShaderFile;
+    cShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+    try
+    {
+      cShaderFile.open(computePath);
+      std::stringstream cShaderStream;
+      cShaderStream << cShaderFile.rdbuf();
+      cShaderFile.close();
+      compCode = cShaderStream.str();
+    }
+    catch(std::ifstream::failure& e)
+    {
+      std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ: " << e.what() <<std::endl;
+    }
+    const char* cShaderCode = compCode.c_str();
+    unsigned int compute;
+    compute = glCreateShader(GL_COMPUTE_SHADER);
+    glShaderSource(compute, 1, &cShaderCode, NULL);
+    glCompileShader(compute);
+    checkCompileErrors(compute, "COMPUTE");
+
+    ID = glCreateProgram();
+    glAttachShader(ID, compute);
+    glLinkProgram(ID);
+    checkCompileErrors(ID, "PROGRAM");
+
+    glDeleteShader(compute);
+  }
+
+  // normal shader
   Shader(const char* vertexPath, const char* fragmentPath,
     const char* tescPath = nullptr, const char* tesePath = nullptr,
     const char* geometryPath = nullptr) {
@@ -108,7 +142,6 @@ public:
       checkCompileErrors(tese, "TES_EVALUTION");
     }
     
-
     // geometry shader
     unsigned int geometry;
     if(geometryPath != nullptr)
