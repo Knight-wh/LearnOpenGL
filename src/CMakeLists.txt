@@ -2,3 +2,4 @@
 add_subdirectory(Util)
 add_subdirectory(Terrain)
 add_subdirectory(Miscellaneous)
+add_subdirectory(ShaderToy)
