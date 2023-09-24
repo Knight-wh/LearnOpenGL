@@ -81,9 +81,13 @@ int main()
 
   // build and compile shaders
   // -------------------------
+  // TODO: shader install path
   Shader quadShader(
     "D:/Files/master/Study-Course/learnopengl/LearnOpenGL/data/shaders/ShaderToy/1_screen_quad.vert",
-    "D:/Files/master/Study-Course/learnopengl/LearnOpenGL/data/shaders/ShaderToy/1_screen_quad.frag"
+    // "D:/Files/master/Study-Course/learnopengl/LearnOpenGL/data/shaders/ShaderToy/1_screen_quad.frag",
+    //"D:/Files/master/Study-Course/learnopengl/LearnOpenGL/data/shaders/ShaderToy/2_simple_ray_marching.frag",
+    //"D:/Files/master/Study-Course/learnopengl/LearnOpenGL/data/shaders/ShaderToy/3_light_normal.frag",
+    "D:/Files/master/Study-Course/learnopengl/LearnOpenGL/data/shaders/ShaderToy/4_CSG.frag"
   );
 
 
